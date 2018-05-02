@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {{css('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')}}
+  {{css('./index.css')}}
+  <title>發票兌獎</title>
+
+</head>
+<body>
+  @include('layout/normalUser/navbar')
+
+  <div class="container-fluid" style="padding:0px">
+    @!section('content')
+
+    <div style="height:50px"></div>
+
+    <div class="row">
+      <div class="col-sm-5"></div>
+      <div class="col-sm-2" id="trackingaudrey">追蹤AUDREY奧黛莉</div>
+      <div class="col-sm-5"></div>      
+    </div>
+     <div style="height:50px"></div>
+
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4" id="threeicon">
+        <div class="row" id="imgRow">
+          <div class="col">
+          <a href="https://zh-tw.facebook.com/twaudrey/" target="_blank">
+            <img class="img-fluid imcicon" src="./img/fbicon.png" alt="">
+          </a>
+          </div>
+          <div class="col">
+          <a href="https://www.instagram.com/audrey_lingerie_tw/" target="_blank">
+            <img class="img-fluid imcicon" src="./img/igicon.png" alt="">
+          </a>
+          </div>
+          <div class="col">
+          <a href="https://projects.invisionapp.com/redirect?url=https%3A%2F%2Fwww.youtube.com%2Fuser%2Fautw100">
+            <img class="img-fluid imcicon" src="./img/youtubeicon.png" alt="">
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4"></div>      
+    </div>
+    </div>
+
+  @include('layout/normalUser/footer')
+  </div>
+
+  {{ script('https://cdn.jsdelivr.net/npm/vue/dist/vue.js')}}
+  {{ script('https://code.jquery.com/jquery-3.2.1.slim.min.js') }} 
+  {{ script('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js')}}
+  {{ script('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js') }}
+
+
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>    
+<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">    
+<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/locale/af.js"></script>
+{{--  月曆元件  --}}
+<script type="text/javascript">
+  $(function () {
+    var minDate = moment().add(3,'days');
+    //限制只能選擇3天候
+    //minDate3 = minDate.getFullYear()+"-"+(minDate.getMonth()+1)+"-"+(minDate.getDate()+3)
+    $('#date1').datetimepicker({
+      format: 'YYYY-MM-DD',
+      locale: moment.locale('zh-cn'),
+        inline: true,
+        sideBySide: true,
+        keepOpen: true,
+        minDate: minDate,        
+    });
+    $('#date1').datetimepicker('show');
+
+  });
+
+</script>
+</body>
+</html>
