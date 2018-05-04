@@ -7,7 +7,7 @@ var StoreAndTime_store = [];
 for(let x=0;x< StoreAndTime_len;x++){
   StoreAndTime_store[x] = $("#invisible_storetime option").eq(x).val();
   StoreAndTime_time[x] = $("#invisible_storetime option").eq(x).text();
-  console.log("陣列ID:"+x+"店櫃"+StoreAndTime_store[x]+"; 時間:" + StoreAndTime_time[x])
+  // console.log("陣列ID:"+x+"店櫃"+StoreAndTime_store[x]+"; 時間:" + StoreAndTime_time[x])
 }
 
 var time_stack = [
@@ -31,10 +31,12 @@ $("#store_id").change(function(){
   var store = $("#store_id").val()-1;
   var IDtoStack = time_stack[StoreAndTime_time[store]];
   var stack_len = IDtoStack.length;
-  console.log(IDtoStack,stack_len);
+  // console.log(IDtoStack,stack_len);
+  $("#select_time").append($("<option></option>").attr("value", "請挑選時段").text("請挑選時段"));
   for(let j=0;j<stack_len;j++){
     $("#select_time").append($("<option></option>").attr("value",IDtoStack[j]).text(IDtoStack[j]));
   }
+
 })
 
 

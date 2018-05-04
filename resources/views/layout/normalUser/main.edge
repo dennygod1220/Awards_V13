@@ -7,7 +7,7 @@
   {{css('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')}}
   {{css('./index.css')}}
   <title>發票兌獎</title>
-
+  {{css('./footer_icon.css')}}
 </head>
 <body>
   @include('layout/normalUser/navbar')
@@ -24,30 +24,22 @@
     </div>
      <div style="height:50px"></div>
 
-    <div class="row">
-      <div class="col-sm-4"></div>
-      <div class="col-sm-4" id="threeicon">
-        <div class="row" id="imgRow">
-          <div class="col">
-          <a href="https://zh-tw.facebook.com/twaudrey/" target="_blank">
-            <img class="img-fluid imcicon" src="./img/fbicon.png" alt="">
-          </a>
-          </div>
-          <div class="col">
-          <a href="https://www.instagram.com/audrey_lingerie_tw/" target="_blank">
-            <img class="img-fluid imcicon" src="./img/igicon.png" alt="">
-          </a>
-          </div>
-          <div class="col">
-          <a href="https://projects.invisionapp.com/redirect?url=https%3A%2F%2Fwww.youtube.com%2Fuser%2Fautw100">
-            <img class="img-fluid imcicon" src="./img/youtubeicon.png" alt="">
-          </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4"></div>      
-    </div>
-    </div>
+
+
+<div class="wrp">
+  <a class="icon icon-twitter" href="https://zh-tw.facebook.com/twaudrey/" target="_blank">
+    <img class="fa fa-twitter" src="./img/new/fb@2x.png" alt="">
+  </a>
+  <a class="icon icon-facebook" href="https://www.instagram.com/audrey_lingerie_tw/" target="_blank">
+    <img class="fa fa-facebook" src="./img/new/ig@2x.png" alt="">
+  </a>
+  <a class="icon icon-instagram" href="https://projects.invisionapp.com/redirect?url=https%3A%2F%2Fwww.youtube.com%2Fuser%2Fautw100"  target="_blank">
+    <img class="fa fa-instagram" src="./img/new/youtube@2x.png" alt="">
+  </a>
+</div>
+
+</div>
+
 
   @include('layout/normalUser/footer')
   </div>
@@ -66,19 +58,84 @@
 <script type="text/javascript">
   $(function () {
     var minDate = moment().add(3,'days');
+    var maxDate;
     //限制只能選擇3天候
-    //minDate3 = minDate.getFullYear()+"-"+(minDate.getMonth()+1)+"-"+(minDate.getDate()+3)
     $('#date1').datetimepicker({
       format: 'YYYY-MM-DD',
       locale: moment.locale('zh-cn'),
         inline: true,
         sideBySide: true,
         keepOpen: true,
-        minDate: minDate,        
+        minDate: minDate,
+        maxDate: maxDate,     
     });
     $('#date1').datetimepicker('show');
 
-  });
+
+const StoreAndTime_len = $("#invisible_storetime").children().length;
+var StoreAndTime_time = [];
+var StoreAndTime_store = [];
+for(let x=0;x< StoreAndTime_len;x++){
+  StoreAndTime_store[x] = $("#invisible_storetime option").eq(x).val();
+  StoreAndTime_time[x] = $("#invisible_storetime option").eq(x).text();
+}
+
+$("#store_id").change(function(){
+
+  var store = $("#store_id").val()-1;
+  //time = 12 時
+  if(StoreAndTime_time[store] == 12){
+    	$('#date1').datetimepicker('destroy');
+        var disable_date =  [
+          moment("2018-05-18"),
+          moment("2018-05-20"),        
+        ] 
+    $('#date1').datetimepicker({
+      format: 'YYYY-MM-DD',
+      locale: moment.locale('zh-cn'),
+        inline: true,
+        sideBySide: true,
+        keepOpen: true,
+        minDate:  moment("2018-06-11"),
+        maxDate:  moment("2018-06-18"),     
+        //disabledDates: disable_date
+    });
+    $('#date1').datetimepicker('show');
+  }
+  else if(StoreAndTime_time[store] == 11){
+    	$('#date1').datetimepicker('destroy');
+        var disable_date =  [
+          moment("2018-06-15"),
+        ] 
+    $('#date1').datetimepicker({
+      format: 'YYYY-MM-DD',
+      locale: moment.locale('zh-cn'),
+        inline: true,
+        sideBySide: true,
+        keepOpen: true,
+        minDate:  moment("2018-06-10"),
+        maxDate:  moment("2018-06-18"),     
+        disabledDates: disable_date
+    });
+    $('#date1').datetimepicker('show');
+  }
+
+  else{
+    	$('#date1').datetimepicker('destroy');
+        var minDate = moment().add(3,'days');
+      $('#date1').datetimepicker({
+      format: 'YYYY-MM-DD',
+      locale: moment.locale('zh-cn'),
+        inline: true,
+        sideBySide: true,
+        keepOpen: true,
+        minDate: minDate, 
+    });
+    $('#date1').datetimepicker('show');
+  }
+})
+
+});
 
 </script>
 </body>
