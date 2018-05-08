@@ -114,7 +114,7 @@ $(window).resize(function() {
   const birthday_Y = ["年"];
   const birthday_M = ["月"];
   const birthday_D = ["日"];
-  for (var i = 1990; i < 2019; i++) {
+  for (var i = 1930; i < 2019; i++) {
     birthday_Y.push(i);
   }
   for (var i = 1; i < 13; i++) {
