@@ -70,9 +70,11 @@ $(window).resize(function() {
   const store_area = [];
   //儲存商店名稱資訊
   const store_name = [];
+  //儲存地址
+  const store_address = [];
   //儲存精簡過的地區資料
   //取得隱形select 中含有多少個 option 將值存入陣列中方便操作
-  const store_len = $("#invisible_storearea").children().length;
+  var store_len = $("#invisible_storearea").children().length;
   for (var i = 0; i < store_len; i++) {
     let reg = {
       id: $("#invisible_storearea option").eq(i).val(),
@@ -85,9 +87,16 @@ $(window).resize(function() {
       name: $("#invisible_storenamed option").eq(i).text()
     }
     store_name.push(reg2)
+
+    let reg3 ={
+      id: $("#invisible_storeaddress option").eq(i).val(),
+      address: $("#invisible_storeaddress option").eq(i).text()
+    }
+    store_address.push(reg3)
   }
   //======================當使用者選擇了商店地區=========================
   $("#store_area").change(function () {
+    $("#storeadd").text("");
     let guest_select = $("#store_area").val();
     $("#store_id option").remove();
     $("#store_id").append($("<option></option>").attr("value", "").text("請選擇店櫃"));
@@ -101,8 +110,17 @@ $(window).resize(function() {
   })
 //使用者選了商店
   $("#store_id").change(function(){
+    $("#storeadd").text("");
     $("#real_store_id").val("");
     $("#real_store_id").val($("#store_id").val());
+    var sel_id = $("#store_id").val();
+
+    var store_len2 = $("#invisible_storeaddress").children().length;
+    for(let i = 0;i<store_len2; i++){
+      if(sel_id == store_address[i].id){
+        $("#storeadd").text(store_address[i].address)
+      }
+    }
   })
 
 //======================當使用者直接按下送出個人資料假按鈕時====================
@@ -148,7 +166,7 @@ $(window).resize(function() {
 
 //==========================尺寸大小======================
 const size = {
-  size_in: ['C70', 'C75', 'C80', 'D70', 'D75', 'D80', 'E70', 'E75','c70', 'c75', 'c80', 'd70', 'd75', 'd80', 'e70', 'e75'],
+  size_in: ['請挑選您的尺寸','C70', 'C75', 'C80', 'D70', 'D75', 'D80', 'E70', 'E75'],
   selectsize:""
 }
 const size_select = new Vue({
@@ -176,17 +194,35 @@ const size_select = new Vue({
 })
 
 
-// $("#input_size").val($("#selectsize").val())
-// $("#selectsize").change(function () {
-//   if($("#selectsize").val() == "其他尺寸"){
-//     $("#input_size").val("");
-   
-//     alert("很抱歉，此次體驗活動無您的尺寸");
-//     $('#selectsize').val("C70");
-//   }
-//   $("#input_size").val($("#selectsize").val());
-// })
+//===============鎖定元件讓使用者照順序填入=======================
 
+//店櫃
+$("#store_id").change(function(){
+  $("#select_time").removeAttr("disabled","true")
+  $("#datepart").css("display","inline")
+  $("#whattime").css("display","inline")
+})
+//預約時段
+$("#select_time").change(function(){
+  $("#size").css("display","inline")  
+  $("#selectsize").removeAttr("disabled","true")
+})
+//尺寸
+$("#selectsize").change(function(){
+  $("#rightpart").css("display","block")
+  $("#namepart").css("display","inline")  
+  $("#inputname").removeAttr("readonly","true")
+})
+//姓名
+$("#inputname").change(function(){
+  $("#phonepart").css("display","inline")  
+  $("#inputcellphone").removeAttr("readonly","true")
+})
+//電話
+$("#inputcellphone").change(function(){
+  $("#birdaybody").css("display","inline")  
+})
+//選完生日才出現email輸入框，此動作方法使用v-if方式完成
 
 })
 

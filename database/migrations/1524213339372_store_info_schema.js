@@ -12,6 +12,7 @@ class StoreInfoSchema extends Schema {
       table.string('store_phone').comment('店櫃電話')
       table.string('can_reserve_time').comment('可預約時段')
       table.integer('time_id').comment('可預約時段代號')
+      table.integer('store_num').comment('店櫃編號')
       table.timestamps()
     })
   }

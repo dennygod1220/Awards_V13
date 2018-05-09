@@ -11,7 +11,9 @@ Route.on('/').render('awardsindex.index')
 Route.post('/','AwardsIndexController.check')
 
 //填個人資料，發票符合資格才能到達此頁
-Route.get('/invoiceok','GuestinfoController.invoiceok').middleware(['Checkinvoice'])
+//0509不擋發票了，所以拿掉middleware
+// Route.get('/invoiceok','GuestinfoController.invoiceok').middleware(['Checkinvoice'])
+Route.get('/invoiceok','GuestinfoController.invoiceok')
 
 Route.post('/invoiceok','GuestinfoController.store').validator('guestinfo') 
 // Route.post('/invoiceok','GuestinfoController.store') 
