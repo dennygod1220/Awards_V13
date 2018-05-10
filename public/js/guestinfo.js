@@ -166,7 +166,7 @@ $(window).resize(function() {
 
 //==========================尺寸大小======================
 const size = {
-  size_in: ['請挑選您的尺寸','C70', 'C75', 'C80', 'D70', 'D75', 'D80', 'E70', 'E75'],
+  size_in: ['請挑選您的尺寸','C70', 'C75', 'C80', 'D70', 'D75', 'D80', 'E70', 'E75','其他尺寸'],
   selectsize:""
 }
 const size_select = new Vue({
@@ -177,18 +177,18 @@ const size_select = new Vue({
   methods:{
     checksize:function(event){
       var count = 0;
+      console.log(event.target.value)
       for(let i = 0 ; i < this.size_in.length ; i++){
         if(event.target.value == this.size_in[i]){
           count++;
         }
       }
-      if(count == 0){
+      if(event.target.value == '其他尺寸'){
         alert("『提醒您：本次體驗試穿之新品罩杯尺寸為 CD70-80;E70-75，如無法成功完成體驗試穿並填寫問券,恕無法享有免費送內衣!』");
-        window.location.replace("/");
+        // window.location.replace("/");
       }
-      else{
-        return this.selectsize = event.target.value;
-      }
+       return this.selectsize = event.target.value;
+      
     }
   }
 })
@@ -223,6 +223,11 @@ $("#inputcellphone").change(function(){
   $("#birdaybody").css("display","inline")  
 })
 //選完生日才出現email輸入框，此動作方法使用v-if方式完成
+
+//================行動電話提醒===========
+// $("#inputcellphone").change(function(){
+//   $("#phonealert").css("display","inline")
+// })
 
 })
 
